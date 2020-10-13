@@ -35,7 +35,6 @@ public class Butterfly extends Pane implements Runnable {
     }
 
     private void moveY() {
-        int yDir = (int) getTranslateY();
         if(this.getTranslateY() <= 0
                 || this.getTranslateY() >= mainApp.getPane().getMaxHeight()){
             directionY = Math.negateExact(directionY);
@@ -55,8 +54,13 @@ public class Butterfly extends Pane implements Runnable {
         animationTimer.start();
     }
 
-
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
+
+    public void destroy(){
+        mainApp.getButterflyList().remove(this);
+        mainApp.getPane().getChildren().remove(this);
+    }
+
 }
