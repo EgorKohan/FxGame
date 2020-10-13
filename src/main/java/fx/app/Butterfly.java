@@ -58,7 +58,7 @@ public class Butterfly extends Pane implements Runnable {
         this.mainApp = mainApp;
     }
 
-    public void destroy(){
+    public synchronized void destroy(){
         mainApp.getButterflyList().remove(this);
         mainApp.getPane().getChildren().remove(this);
     }
