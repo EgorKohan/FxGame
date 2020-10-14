@@ -15,7 +15,7 @@ public class Butterfly extends Pane implements Runnable {
     private MainApp mainApp;
 
     public Butterfly() {
-        ImageView imageView = new ImageView(IMG_URL);
+        ImageView imageView = new ImageView(IMG_URL); //fw TODO
         imageView.setFitHeight(40);
         imageView.setFitWidth(50);
         this.setCursor(Cursor.CROSSHAIR);

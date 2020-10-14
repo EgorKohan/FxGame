@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class MainApp extends Application {
@@ -39,7 +40,12 @@ public class MainApp extends Application {
     private void createSceneInstance() {
         butterflyNet.start();
         butterflyNet.setOnMouseClicked(event -> {
-            butterflyNet.catchButterfly(butterflyList);
+            if(butterflyNet.catchButterfly(butterflyList) != 0){
+                scoreLabel.setText("Score = " + butterflyNet.getCount());
+                --missScore;
+            } else{
+                missLabel.setText("Miss = " + ++missScore);
+            }
         });
         missLabel.setLayoutX(100);
         pane.setPrefSize(500, 400);
@@ -58,11 +64,11 @@ public class MainApp extends Application {
         butterfly.get().setMainApp(this);
         butterflyList.add(butterfly.get());
         pane.getChildren().add(butterfly.get());
-        butterfly.get().setOnMouseClicked(event -> {
-            scoreLabel.setText("Score = " + ++score);
-            --missScore;
-            butterfly.get().destroy();
-        });
+//        butterfly.get().setOnMouseClicked(event -> {
+//            scoreLabel.setText("Score = " + ++score);
+//            --missScore;
+//            butterfly.get().destroy();
+//        });
         new Thread(butterfly.get()).start();
     }
 
